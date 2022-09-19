@@ -14,10 +14,18 @@ let panels = [[-1, -1, -1, -1, -1, -1, -1],
     [-1, 0, 0, 0, 0, 0, -1],
     [-1, 0, 0, 0, 0, 0, -1],
     [-1, -1, -1, -1, -1, -1, -1]];
+// 色定数
+const colors = {
+    RED: 2,
+    GREEN: 3,
+    WHITE: 4,
+    BLUE: 5
+}
 
 const app = Vue.createApp({
     data: () => ({
-        message: 'I have seen it...'
+        message: 'I have seen it...',
+        result: ''
     }),
     methods:{
         choiceColor: function(num) {
@@ -54,6 +62,7 @@ const app = Vue.createApp({
             panelId = num;
                 this.colorSet(color, panelId, verNo, sideNo);
                 this.panelChange(panels, verNo, sideNo);
+                this.total();
             }
         },
         colorSet: function(col, id, v, s) {
@@ -389,6 +398,33 @@ const app = Vue.createApp({
                 }
                 console.log("右下完了"); 
             }
+        },
+        total: function () {
+            let redCount = 0;
+            let greenCount = 0;
+            let whiteCount = 0;
+            let blueCount = 0;
+            for (x = 0; x <= 6; x++) {
+                for (y = 0; y <= 6; y++) {
+                    switch (panels[x][y]) {
+                        case colors.RED:
+                            redCount++;
+                            break;
+                        case colors.GREEN:
+                            greenCount++;
+                            break;
+                        case colors.WHITE:
+                            whiteCount++;
+                            break;
+                        case colors.BLUE:
+                            blueCount++;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            this.result = `赤:${redCount},緑:${greenCount},白:${whiteCount},青:${blueCount}`;
         }
     }
 })
