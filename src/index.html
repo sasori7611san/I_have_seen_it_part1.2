@@ -11,31 +11,20 @@
     <div id="app">
         <p>{{ message }}</p>
         <div class ="panel">
-            <button id="1" class="gray" v-on:click="action(1);">1</button><button id="2" class="gray" v-on:click="action(2);">2</button><button id="3" class="gray" v-on:click="action(3);">3</button><button id="4" class="gray" v-on:click="action(4);">4</button><button id="5" class="gray" v-on:click="action(5);">5</button><br />
-            <button id="6" class="gray" v-on:click="action(6);">6</button><button id="7" class="gray" v-on:click="action(7);">7</button><button id="8" class="gray" v-on:click="action(8);">8</button><button id="9" class="gray" v-on:click="action(9);">9</button><button id="10" class="gray" v-on:click="action(10);">10</button><br />
-            <button id="11" class="gray" v-on:click="action(11);">11</button><button id="12" class="gray" v-on:click="action(12);">12</button><button id="13" class="gray" v-on:click="action(13);">13</button><button id="14" class="gray" v-on:click="action(14);">14</button><button id="15" class="gray" v-on:click="action(15);">15</button><br />
-            <button id="16" class="gray" v-on:click="action(16);">16</button><button id="17" class="gray" v-on:click="action(17);">17</button><button id="18" class="gray" v-on:click="action(18);">18</button><button id="19" class="gray" v-on:click="action(19);">19</button><button id="20" class="gray" v-on:click="action(20);">20</button><br />
-            <button id="21" class="gray" v-on:click="action(21);">21</button><button id="22" class="gray" v-on:click="action(22);">22</button><button id="23" class="gray" v-on:click="action(23);">23</button><button id="24" class="gray" v-on:click="action(24);">24</button><button id="25" class="gray" v-on:click="action(25);">25</button><br />
-            <!-- <button id="1" class="gray" onclick="action(1);">1</button><button id="2" class="gray" onclick="action(2);">2</button><button id="3" class="gray" onclick="action(3);">3</button><button id="4" class="gray" onclick="action(4);">4</button><button id="5" class="gray" onclick="action(5);">5</button><br />
-            <button id="6" class="gray" onclick="action(6);">6</button><button id="7" class="gray" onclick="action(7);">7</button><button id="8" class="gray" onclick="action(8);">8</button><button id="9" class="gray" onclick="action(9);">9</button><button id="10" class="gray" onclick="action(10);">10</button><br />
-            <button id="11" class="gray" onclick="action(11);">11</button><button id="12" class="gray" onclick="action(12);">12</button><button id="13" class="gray" onclick="action(13);">13</button><button id="14" class="gray" onclick="action(14);">14</button><button id="15" class="gray" onclick="action(15);">15</button><br />
-            <button id="16" class="gray" onclick="action(16);">16</button><button id="17" class="gray" onclick="action(17);">17</button><button id="18" class="gray" onclick="action(18);">18</button><button id="19" class="gray" onclick="action(19);">19</button><button id="20" class="gray" onclick="action(20);">20</button><br />
-            <button id="21" class="gray" onclick="action(21);">21</button><button id="22" class="gray" onclick="action(22);">22</button><button id="23" class="gray" onclick="action(23);">23</button><button id="24" class="gray" onclick="action(24);">24</button><button id="25" class="gray" onclick="action(25);">25</button><br /> -->
+            <button class="gray" v-on:click="action(1);">1</button><button class="gray" v-on:click="action(2);">2</button><button class="gray" v-on:click="action(3);">3</button><button class="gray" v-on:click="action(4);">4</button><button class="gray" v-on:click="action(5);">5</button><br />
+            <button class="gray" v-on:click="action(6);">6</button><button class="gray" v-on:click="action(7);">7</button><button class="gray" v-on:click="action(8);">8</button><button class="gray" v-on:click="action(9);">9</button><button class="gray" v-on:click="action(10);">10</button><br />
+            <button class="gray" v-on:click="action(11);">11</button><button class="gray" v-on:click="action(12);">12</button><button class="gray" v-on:click="action(13);">13</button><button class="gray" v-on:click="action(14);">14</button><button class="gray" v-on:click="action(15);">15</button><br />
+            <button class="gray" v-on:click="action(16);">16</button><button class="gray" v-on:click="action(17);">17</button><button class="gray" v-on:click="action(18);">18</button><button class="gray" v-on:click="action(19);">19</button><button class="gray" v-on:click="action(20);">20</button><br />
+            <button class="gray" v-on:click="action(21);">21</button><button class="gray" v-on:click="action(22);">22</button><button class="gray" v-on:click="action(23);">23</button><button class="gray" v-on:click="action(24);">24</button><button class="gray" v-on:click="action(25);">25</button><br />
         </div>
         <br />
         <div class="choice">
-            <button id="102" class="red" v-on:click="choiceColor(2);"></button>
-            <button id="103" class="green" v-on:click="choiceColor(3);"></button>
-            <button id="104" class="white" v-on:click="choiceColor(4);"></button>
-            <button id="105" class="blue" v-on:click="choiceColor(5);"></button><br />
-            <button id="101" class="yellow" v-on:click="choiceColor(1);"></button>
-            <button id="100" class="gray" v-on:click="choiceColor(0);"></button><br />
-            <!-- <button id="102" class="red" v-on:click="choiceColor(2);"></button>
-            <button id="103" class="green" v-on:click="choiceColor(3);"></button>
-            <button id="104" class="white" v-on:click="choiceColor(4);"></button>
-            <button id="105" class="blue" v-on:click="choiceColor(5);"></button><br />
-            <button id="101" class="yellow" v-on:click="choiceColor(1);"></button>
-            <button id="100" class="gray" v-on:click="choiceColor(0);"></button><br /> -->
+            <button id="buttonRed" v-on:click="choiceColor(2);"></button>
+            <button id="buttonGreen" v-on:click="choiceColor(3);"></button>
+            <button id="buttonWhite" v-on:click="choiceColor(4);"></button>
+            <button id="buttonBlue" v-on:click="choiceColor(5);"></button><br />
+            <button id="buttonYellow" v-on:click="choiceColor(1);"></button>
+            <button id="buttonGray" v-on:click="choiceColor(0);"></button><br />
         </div>
         <p>更新で最初からに戻ります。</p>
         <!-- <h2>TODO List</h2>
