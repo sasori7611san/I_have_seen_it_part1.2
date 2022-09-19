@@ -1,11 +1,5 @@
 // 使用色番号保持
 let color = 0;
-// 縦要素番号
-let verNo = 0;
-// 横要素番号
-let sideNo = 0;
-// パネルID
-let panelId = 0;
 // パネル
 let panels = [[-1, -1, -1, -1, -1, -1, -1],
     [-1, 0, 0, 0, 0, 0, -1],
@@ -51,6 +45,12 @@ const app = Vue.createApp({
             }
         },
         action: function(num) {
+            // 縦要素番号
+            let verNo = 0;
+            // 横要素番号
+            let sideNo = 0;
+            // パネルID
+            let panelId = num;
             if (num <= 25 && num > 0) {
             // 取得配列要素取得
             if (Math.floor(num / 5) < 5 && num % 5 !== 0) {
@@ -59,7 +59,6 @@ const app = Vue.createApp({
                 verNo = Math.floor(num / 5)
             }
             num % 5 == 0? sideNo = 5: sideNo = num % 5;
-            panelId = num;
                 this.colorSet(color, panelId, verNo, sideNo);
                 this.panelChange(panels, verNo, sideNo);
                 this.total();
