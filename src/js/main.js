@@ -1,5 +1,6 @@
 // 使用色番号保持
 let color = 0;
+
 // パネル
 let panels = [
     [-1, -1, -1, -1, -1, -1, -1],
@@ -42,6 +43,7 @@ const app = Vue.createApp({
         PanelNo: ''
     }),
     methods:{
+        // 色選択
         choiceColor: function(num) {
             switch(num) {
                 case colors.RED: color = 2;
@@ -64,57 +66,81 @@ const app = Vue.createApp({
                 break;
             }
             this.currentColor();
-            // 入れるかチェック
-            // 条件番号
-            let condNo = 9;
             // 取得可能な番号
             let pNo = 0;
             let canGetPanelNo = [];
-            // チェックワークパネル
-            let checkPanelwk = [
-                [9, 9, 9, 9, 9, 9, 9],
-                [9, 9, 9, 9, 9, 9, 9],
-                [9, 9, 9, 9, 9, 9, 9],
-                [9, 9, 9, 9, 9, 9, 9],
-                [9, 9, 9, 9, 9, 9, 9],
-                [9, 9, 9, 9, 9, 9, 9],
-                [9, 9, 9, 9, 9, 9, 9]
-            ];
-            // チェックパネル初期化
-            for (m = 0; m <= 6; m++) {
-                for (n = 0; n <= 6; n++) {
-                    checkPanel[m][n] = false;
-                }
-            }
-            // 条件確認ロジック
-            for (m = 0; m <= 6; m++) {
-                for (n = 0; n <= 6; n++) {
-                    if (panels[m][n] === colors.GRAY) {
-                       // 変わる条件を判定
-                        checkPanelwk[m][n] = this.canGetPanelCheck(m, n); 
-                    }
-                    if (checkPanelwk[m][n] < condNo) {
-                        condNo = checkPanelwk[m][n];
+            // 黄色（チャンスの場合は違うロジック）
+            if (color == colors.YELLOW) {
+                // チェックパネル初期化
+                for (m = 0; m <= 6; m++) {
+                    for (n = 0; n <= 6; n++) {
+                        checkPanel[m][n] = false;
                     }
                 }
-            }
-            console.log(`条件内容${checkPanelwk}`);
-            console.log(`適用条件${condNo}`);
-            for (m = 0; m <= 6; m++) {
-                for (n = 0; n <= 6; n++) {
-                    if (checkPanelwk[m][n] === condNo) {
-                       // 変わるパネルがあるか判定
-                        checkPanel[m][n] = true;
-                    }
-                    if (checkPanel[m][n]) {
-                        pNo = (m - 1) * 5 + n;
-                        canGetPanelNo.push(pNo.toString());
+                for (m = 0; m <= 6; m++) {
+                    for (n = 0; n <= 6; n++) {
+                        if (panels[m][n] >= colors.RED) {
+                        // 変わる条件を判定
+                            checkPanel[m][n] = true;
+                        }
+                        if (checkPanel[m][n]) {
+                            pNo = (m - 1) * 5 + n;
+                            canGetPanelNo.push(pNo.toString());
+                        }
                     }
                 }
+            } else {
+                // 取れるか否かチェック
+                // 条件番号
+                let condNo = 9;
+                // チェックワークパネル
+                let checkPanelwk = [
+                    [9, 9, 9, 9, 9, 9, 9],
+                    [9, 9, 9, 9, 9, 9, 9],
+                    [9, 9, 9, 9, 9, 9, 9],
+                    [9, 9, 9, 9, 9, 9, 9],
+                    [9, 9, 9, 9, 9, 9, 9],
+                    [9, 9, 9, 9, 9, 9, 9],
+                    [9, 9, 9, 9, 9, 9, 9]
+                ];
+                // チェックパネル初期化
+                for (m = 0; m <= 6; m++) {
+                    for (n = 0; n <= 6; n++) {
+                        checkPanel[m][n] = false;
+                    }
+                }
+                // 条件確認ロジック
+                for (m = 0; m <= 6; m++) {
+                    for (n = 0; n <= 6; n++) {
+                        if (panels[m][n] === colors.GRAY || panels[m][n] === colors.YELLOW) {
+                        // 変わる条件を判定
+                            checkPanelwk[m][n] = this.canGetPanelCheck(m, n); 
+                        }
+                        if (checkPanelwk[m][n] < condNo) {
+                            condNo = checkPanelwk[m][n];
+                        }
+                    }
+                }
+                console.log(checkPanelwk);
+                console.log(`適用条件${condNo}`);
+                for (m = 0; m <= 6; m++) {
+                    for (n = 0; n <= 6; n++) {
+                        if (checkPanelwk[m][n] === condNo) {
+                        // 変わるパネルがあるか判定
+                            checkPanel[m][n] = true;
+                        }
+                        if (checkPanel[m][n]) {
+                            pNo = (m - 1) * 5 + n;
+                            canGetPanelNo.push(pNo.toString());
+                        }
+                    }
+                } 
             }
-            console.log(`変更可能${checkPanel}`);
+            // console.log(`変更可能${checkPanel}`);
             this.PanelNo = canGetPanelNo.join(",");
         },
+
+        // パネル取得
         action: function(num) {
             // 縦要素番号
             let verNo = 0;
@@ -132,11 +158,14 @@ const app = Vue.createApp({
                     this.panelChange(panels, verNo, sideNo);
                     this.total();
                     this.warning = ''
+                    // console.log(panels);
                 } else {
                     this.warning = '今は取れません'
                 }
             }
         },
+
+        // パネル色の設定
         colorSet: function(col, id, v, s) {
             // id文字列化
             let strId = id.toString(); 
@@ -171,6 +200,8 @@ const app = Vue.createApp({
                 }
             }
         },
+
+        // パネル変化ロジック
         panelChange: function(pan, v, s) {
             // 起点の色
             let cn = pan[v][s];
@@ -333,6 +364,8 @@ const app = Vue.createApp({
                 // console.log("右下完了"); 
             }
         },
+
+        // 集計ロジック
         total: function () {
             let redCount = 0;
             let greenCount = 0;
@@ -360,6 +393,8 @@ const app = Vue.createApp({
             }
             this.result = `赤:${redCount},緑:${greenCount},白:${whiteCount},青:${blueCount}`;
         },
+
+        // 選択中の色表示
         currentColor: function () {
             switch (color) {
                 case colors.YELLOW:
@@ -382,6 +417,8 @@ const app = Vue.createApp({
                     break;
             }
         },
+
+        // 取得可能か確認する関数
         canGetPanelCheck: function (v, s) {
             // 取得可能フラグ（1:挟める箇所,2:次挟める箇所,3:自分や他人と隣接している箇所,9:それ以外）
             let canGetPanel = 9;
@@ -582,6 +619,8 @@ const app = Vue.createApp({
             }
             return canGetPanel;
         },
+
+        // 挟めるか確認（上）
         upSandCheck: function (flag, cn, v, s) {
             for (i = v - 1; i >= 0; i--) {
                 // console.log(`縦:${i},横:${s}`);
@@ -591,14 +630,14 @@ const app = Vue.createApp({
                     flag = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（下）
         downSandCheck: function (flag, cn, v, s) {
             for (i = v + 1; i <= 6; i++) {
                 // console.log(`縦:${i},横:${s}`);
@@ -608,14 +647,14 @@ const app = Vue.createApp({
                     flag = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（左）
         leftSandCheck: function (flag, cn, v, s) {
             for (i = s - 1; i >= 0; i--) {
                 // console.log(`縦:${v},横:${i}`);
@@ -625,14 +664,14 @@ const app = Vue.createApp({
                     flag = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（右）
         rightSandCheck: function (flag, cn, v, s) {
             for (i = s + 1; i <= 6; i++) {
                 // console.log(`縦:${v},横:${i}`);
@@ -642,14 +681,14 @@ const app = Vue.createApp({
                     flag = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（左上）
         leftUpSandCheck: function (flag, cn, v, s) {
             for (i = v - 1, j = s - 1; i >= 0 || j >= 0; i--, j--) {
                 // console.log(`縦:${i},横:${j}`);
@@ -659,14 +698,14 @@ const app = Vue.createApp({
                     flag  = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（左下）
         leftDownSandCheck: function (flag, cn, v, s) {
             for (i = v + 1, j = s - 1; i <= 6 || j >= 0; i++, j--) { 
                 // console.log(`縦:${i},横:${j}`);
@@ -676,14 +715,14 @@ const app = Vue.createApp({
                     flag  = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（右上）
         rightUpSandCheck: function (flag, cn, v, s) {
             for (i = v - 1, j = s + 1; i >= 0 || j <= 6; i--, j++) {
                 // console.log(`縦:${i},横:${j}`); 
@@ -693,14 +732,14 @@ const app = Vue.createApp({
                     flag  = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);
             return flag;
         },
+
+        // 挟めるか確認（右下）
         rightDownSandCheck: function (flag, cn, v, s) {
             for (i = v + 1, j = s + 1; i <= 6 || j <= 6; i++, j++) {
                 // console.log(`縦:${i},横:${j}`);
@@ -710,9 +749,7 @@ const app = Vue.createApp({
                     flag  = false;
                     break;
                 } else {
-                    if (flag) {
-                        break;
-                    }
+                    break;
                 }
             }
             // console.log(`flag:${flag}`);

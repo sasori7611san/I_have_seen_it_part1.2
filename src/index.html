@@ -28,26 +28,8 @@
             <button id="buttonWhite" v-on:click="choiceColor(4);"></button>
             <button id="buttonBlue" v-on:click="choiceColor(5);"></button><br />
             <button id="buttonYellow" v-on:click="choiceColor(1);"></button>
-            <!-- <button id="buttonGray" v-on:click="choiceColor(0);"></button><br /> -->
         </div>
         <p>更新で最初からに戻ります。</p>
-        <!-- <h2>TODO List</h2>
-        <form v-on:submit.prevent>
-            <input type="text" v-model="newItem">
-            <button v-on:click="addItem">Add</button>
-        </form>
-        <ul>
-            <li v-for="(todo, index) in todos">
-                <input type="checkbox" v-model="todo.isDone">
-                <span v-bind:class="{ done: todo.isDone }">
-                    {{ todo.item }}
-                </span>
-                <button v-on:click="deleteItem(index)">
-                    Delete
-                </button>
-            </li>
-        </ul> -->
-        <!-- <pre>{{ $data }}</pre> -->
     </div>
     <script src="https://unpkg.com/vue@3.1.5"></script>
     <script src="js/main.js"></script>
