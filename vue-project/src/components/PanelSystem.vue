@@ -55,8 +55,7 @@ const colors = {
     RED: 2,
     GREEN: 3,
     WHITE: 4,
-    BLUE: 5,
-    FRAME: -1
+    BLUE: 5
 }
 
 export default {
