@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>見たことあるもの</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -18,15 +18,18 @@
             <button id="21" class="gray" v-on:click="action(21);">21</button><button id="22" class="gray" v-on:click="action(22);">22</button><button id="23" class="gray" v-on:click="action(23);">23</button><button id="24" class="gray" v-on:click="action(24);">24</button><button id="25" class="gray" v-on:click="action(25);">25</button><br />
         </div>
         <br />
+        {{ warning }}
+        <p>選択中の色：{{ strColor }}</p>
+        <p>取れる番号は、{{ PanelNo }}</p>
+        {{ result }}
         <div class="choice">
             <button id="buttonRed" v-on:click="choiceColor(2);"></button>
             <button id="buttonGreen" v-on:click="choiceColor(3);"></button>
             <button id="buttonWhite" v-on:click="choiceColor(4);"></button>
             <button id="buttonBlue" v-on:click="choiceColor(5);"></button><br />
             <button id="buttonYellow" v-on:click="choiceColor(1);"></button>
-            <button id="buttonGray" v-on:click="choiceColor(0);"></button><br />
+            <!-- <button id="buttonGray" v-on:click="choiceColor(0);"></button><br /> -->
         </div>
-        {{ result }}
         <p>更新で最初からに戻ります。</p>
         <!-- <h2>TODO List</h2>
         <form v-on:submit.prevent>
