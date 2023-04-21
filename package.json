@@ -18,6 +18,7 @@
   "homepage": "https://github.com/sasori7611san/I_have_seen_it_part1.2#readme",
   "dependencies": {
     "@vue/cli": "^5.0.8",
+    "vls": "^0.8.5",
     "vue": "^3.2.39"
   },
   "devDependencies": {
